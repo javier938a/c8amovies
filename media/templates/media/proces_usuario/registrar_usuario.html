@@ -1,0 +1,46 @@
+{% extends "base.html" %}
+
+{% load crispy_forms_tags %}
+
+{% block contenido %}
+
+
+    <div class="container container-sm container-md container-lg container-xl"> 
+            <h1 class="h1 text-center">Registrar Usuario</h1>
+            <form method="POST">
+                    {% csrf_token %}
+                    {{ form | crispy }}
+                    
+                <!-- Submit button -->
+                <button type="submit" class="btn btn-primary btn-block mb-4">Sign up</button>
+
+                <!-- Register buttons -->
+                <div class="text-center">
+                    <p>or sign up with:</p>
+                    <button type="button" class="btn btn-primary btn-floating mx-1">
+                    <i class="fab fa-facebook-f"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-primary btn-floating mx-1">
+                    <i class="fab fa-google"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-primary btn-floating mx-1">
+                    <i class="fab fa-twitter"></i>
+                    </button>
+
+                    <button type="button" class="btn btn-primary btn-floating mx-1">
+                    <i class="fab fa-github"></i>
+                    </button>
+                </div>
+            </form>
+        <div>
+        {{ form.error }}
+        </div>
+    </div>
+
+
+
+
+
+{% endblock %}
