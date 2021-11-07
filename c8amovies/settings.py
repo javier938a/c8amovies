@@ -112,6 +112,10 @@ AUTH_PASSWORD_VALIDATORS = [
 ]
 
 
+MEDIA_URL='/movies/'
+
+MEDIA_ROOT=BASE_DIR / 'movies'
+
 # Internationalization
 # https://docs.djangoproject.com/en/3.2/topics/i18n/
 
