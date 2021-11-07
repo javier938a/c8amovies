@@ -1,7 +1,7 @@
 from django.contrib import admin
 from .models import User
 from .models import CategoriaCatalogo, ClasificacionCatalogo, TipoCatalog, CatalogoVideo
-from .models import Videos, Visualizaciones
+from .models import Videos, Visualizaciones, TemporadaVideo
 
 # Register your models here.
 admin.site.register(User)
@@ -11,3 +11,4 @@ admin.site.register(TipoCatalog)
 admin.site.register(CatalogoVideo)
 admin.site.register(Videos)
 admin.site.register(Visualizaciones)
+admin.site.register(TemporadaVideo)

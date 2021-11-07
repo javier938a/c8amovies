@@ -1,0 +1,50 @@
+{% extends "base.html" %}
+
+{% block titulo %}
+	<title>{{ detallevideo.catalog_nombre }}</title>
+{% endblock titulo %}
+
+{% block contenido %}
+	<div class="container">
+		{% if detallevideo %}
+			<div class="card" style="width: 80rem;">
+				{% comment %}
+					<div>
+						<button onclick="playPause()">Reproducir</button>
+						<button onclick="reload()">Recargar</button>
+						<button onclick="makeLarge()">Maximizar</button>
+						<button onclick="makeSmall()">Minimizar</button>
+						<button onclick="makeNormal()">Normal</button>
+						<br>
+					</div>					
+				{% endcomment %}
+
+				<center>
+					<video id="videoPlayer" style=" width:80rem; height:20rem;" controls> 
+						<source src="{{ detallevideo.videotriller.url }}" type="">
+							Tu navegador no soporta los videos HTML5
+					</video>					
+				</center>
+
+			  <div class="card-body">
+			    <h5 class="card-title">{{ detallevideo.catalog_nombre }}</h5>
+			    <p class="card-text">
+			    	<h6 class="h6">Sipnosis</h6>
+			    	{{ detallevideo.sipnosis }}
+			    </p>
+			  </div>
+			  <ul class="list-group list-group-flush">
+			    <li class="list-group-item"><span class="h6">Autor:</span> {{ detallevideo.author }}</li>
+			    <li class="list-group-item"> <span class="h6">Categoria:</span> {{ detallevideo.idcategoria }}</li>
+			    <li class="list-group-item"><span class="h6">Clasificacion:</span> {{ detallevideo.idclasificacion }}</li>
+			  </ul>
+			</div>
+		{% endif %}
+	</div>
+
+{% endblock %}
+
+{% block scriptjs %}
+	{% load static %}
+	<script type="text/javascript" src="{% static 'js/funciones_detalle_catalogo.js' %}"></script>
+{% endblock scriptjs %}
