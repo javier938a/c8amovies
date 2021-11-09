@@ -3,6 +3,8 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, UserManager
 from django.urls import reverse_lazy
 from django.utils.text import slugify
+
+import hashlib
 # Create your models here.
 
 class UserManager(UserManager):
@@ -53,7 +55,7 @@ class CatalogoVideo(models.Model):
     idtipo=models.ForeignKey(TipoCatalog, on_delete=models.CASCADE, help_text='Ingrese el tipo de video')
     anio_lanza=models.CharField(max_length=5, null=True, blank=True)
     fecha_publicacion=models.DateTimeField(auto_now_add=True, blank=True, null=True)
-
+    urlencrip=models.TextField(null=True, blank=True, help_text='ingrese la url encriptada');
     def __str__(self):
         return "%s, %s"%(self.catalog_nombre, self.sipnosis)
 
@@ -65,6 +67,8 @@ class CatalogoVideo(models.Model):
 
     def save(self, *args, **kwargs):
         self.url=slugify(self.catalog_nombre[:200])
+        encrip=hashlib.new('sha256', self.url.encode('utf-8'))
+        self.urlencrip=encrip.digest()
         super(CatalogoVideo, self).save(*args, **kwargs)
 
 class TemporadaVideo(models.Model):

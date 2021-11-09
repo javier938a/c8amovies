@@ -3,7 +3,7 @@ from django.urls import path, include
 #importando la vista principal
 from .views import Principal
 from .views import RegistrarUsuario, Login, Logout
-from .views import DetalleCatalogo
+from .views import DetalleCatalogo, ver_video
 
 
 
@@ -13,6 +13,6 @@ urlpatterns=[
     path('login/', Login.as_view(), name='login'),
     path('logout/', Logout.as_view(), name='logout'),
     path('registrar_usuario/', RegistrarUsuario.as_view(), name='registrar'),
-    path('detallecatalogo/<slug:url>/<int:pk>', DetalleCatalogo.as_view(), name='detallecatalog')
-
+    path('detallecatalogo/<slug:url>/<int:pk>', DetalleCatalogo.as_view(), name='detallecatalog'),
+    path('ver_video/<int:pk>', ver_video, name='view_video')
 ]

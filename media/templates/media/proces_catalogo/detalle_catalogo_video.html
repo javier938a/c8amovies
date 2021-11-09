@@ -21,7 +21,7 @@
 
 				<center>
 					<video id="videoPlayer" style=" width:80rem; height:20rem;" controls> 
-						<source src="{{ detallevideo.videotriller.url }}" type="">
+						<source src="{% url 'video:view_video' detallevideo.pk %}" type="">
 							Tu navegador no soporta los videos HTML5
 					</video>					
 				</center>
