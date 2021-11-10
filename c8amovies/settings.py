@@ -38,7 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'media.apps.MediaConfig',
-    'crispy_forms'
+    'crispy_forms',
+    'storages'
 ]
 
 AUTH_USER_MODEL='media.User'
@@ -77,6 +78,9 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'c8amovies.wsgi.application'
 
+
+DROPBOX_OAUTH2_TOKEN='uzZik2Xnm-YAAAAAAAAAAXxPCRu0ejpQDncxlLYw4dn6uaXzSrCLtFRYrRFKUgej'
+DEFAULT_FILE_STORAGE = 'storages.backends.dropbox.DropBoxStorage'
 
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
