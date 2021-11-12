@@ -168,7 +168,7 @@
                         <div class="card h-100">
                             <a href="{% url 'video:detallecatalog' url=listvideo.url pk=listvideo.id  %}">
                                 <img
-                                src="{{ listvideo.img_presentacion.url }}"
+                                src="{% url 'video:view_img_catalog' listvideo.pk %}"
                                 class="card-img-top"
                                 alt="..."
                               />                              

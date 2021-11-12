@@ -8,17 +8,6 @@
 	<div class="container">
 		{% if detallevideo %}
 			<div class="card" style="width: 80rem;">
-				{% comment %}
-					<div>
-						<button onclick="playPause()">Reproducir</button>
-						<button onclick="reload()">Recargar</button>
-						<button onclick="makeLarge()">Maximizar</button>
-						<button onclick="makeSmall()">Minimizar</button>
-						<button onclick="makeNormal()">Normal</button>
-						<br>
-					</div>					
-				{% endcomment %}
-
 				<center>
 					<video id="videoPlayer" style=" width:80rem; height:20rem;" controls> 
 						<source src="{% url 'video:view_video' detallevideo.pk %}" type="">
@@ -40,6 +29,61 @@
 			  </ul>
 			</div>
 		{% endif %}
+
+		<!-- Pills navs -->
+		<ul class="nav nav-pills mb-3" id="ex1" role="tablist">
+			{% for k, v in temporadas.items %}
+			  <li class="nav-item" role="presentation">
+			  	{% ifequal k "1" %}{# verifica si la primera temporada es 1 para activar solo el primer boton los demas se desactivan #}
+				    <a
+				      class="nav-link active"
+				      id="ex1-tab-{{ k }}"
+				      data-mdb-toggle="pill"
+				      href="#ex1-pills-{{ k }}"
+				      role="tab"
+				      aria-controls="ex1-pills-{{ k }}"
+				      aria-selected="true"
+				      >Temporada {{ k }}</a>
+			  	}
+			    {% else %}
+				    <a
+				      class="nav-link"
+				      id="ex1-tab-{{ k }}"
+				      data-mdb-toggle="pill"
+				      href="#ex1-pills-{{ k }}"
+				      role="tab"
+				      aria-controls="ex1-pills-{{ k }}"
+				      aria-selected="true"
+				      >Temporada {{ k }}</a>
+			    {% endifequal %}
+			  </li>
+		  {% endfor %}
+		</ul>
+		<!-- Pills navs -->
+
+		<!-- Pills content -->
+		<div class="tab-content" id="ex1-content">
+		{% for k, v in temporadas.items %}
+		  {% ifequal k "1" %}
+		  <div class="tab-pane fade show active" id="ex1-pills-{{ k }}" role="tabpanel" aria-labelledby="ex1-tab-{{ k }}">
+		  {% else %}
+		  <div class="tab-pane fade" id="ex1-pills-{{ k }}" role="tabpanel" aria-labelledby="ex1-tab-{{ k }}">  
+		  {% endifequal %}
+      	<div class="row row-cols-1 row-cols-md-6 g-4">
+        	{% for video in v %}
+           	<div class="col">
+              <div class="card h-100">
+              	<a href="#">
+                	<img
+                  	src="{% url 'video:view_img_video' video.pk %}" class="card-img-top" alt="..."/>                              
+                </a>
+              </div>
+            </div>
+          {% endfor %}
+       </div>
+		  </div>
+		{% endfor %}
+		</div>
 	</div>
 
 {% endblock %}

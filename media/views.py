@@ -3,7 +3,7 @@ from django.shortcuts import render
 from django.views.generic import TemplateView
 from media.proces_usuario.crud_usuario import RegistrarUsuario
 from media.proces_usuario.crud_usuario import Login, Logout
-from media.proces_catalogo.crud_catalogo import DetalleCatalogo, ver_video
+from media.proces_catalogo.crud_catalogo import DetalleCatalogo, ver_video, ver_image_video, ver_image_catalogo
 #obteniendo el modelo de catalogo
 from .models import CatalogoVideo
 
