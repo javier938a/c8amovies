@@ -8,7 +8,7 @@ from django.shortcuts import redirect
 class DetalleCatalogo(DetailView):
 	template_name='media/proces_catalogo/detalle_catalogo_video.html'
 	model=CatalogoVideo
-	context_object_name='detallevideo'
+	context_object_name='detalleCatalogVideo'
 	slug_field='url'
 	slug_url_kwarg='url'
 
@@ -27,7 +27,9 @@ class DetalleCatalogo(DetailView):
 		i=0
 		for temp in temporadas:
 			i=i+1
-			videos_x_temporada[(str(i))]=video_catalogo.filter(idtemporada__pk=temp.pk)
+			#verificando si existen video para cad auna de las temporadas de lo contario no muestra
+			if(video_catalogo.filter(idtemporada__pk=temp.pk).exists()):
+				videos_x_temporada[(str(i))]=video_catalogo.filter(idtemporada__pk=temp.pk)
 
 
 

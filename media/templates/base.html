@@ -16,6 +16,8 @@
     href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.css"
     rel="stylesheet"
   />
+  {% load static %}
+  <link rel="stylesheet" type="text/css" href="{% static 'css/estilos.css' %}">
     {% block titulo %}
 
     {% endblock %}
@@ -160,34 +162,44 @@
     </nav>
     <!-- Navbar --> 
     {% block contenido %}
-        {% if entity %}
+        
             <div class="containe-fluid">
-                    <div class="row row-cols-1 row-cols-md-6 g-4">
-                      {% for listvideo in entity %}
-                      <div class="col">
-                        <div class="card h-100">
-                            <a href="{% url 'video:detallecatalog' url=listvideo.url pk=listvideo.id  %}">
-                                <img
-                                src="{% url 'video:view_img_catalog' listvideo.pk %}"
-                                class="card-img-top"
-                                alt="..."
-                              />                              
-                            </a>
-                          <div class="card-body">
-                            <h5 class="card-title">{{ listvideo.catalog_nombre }}</h5>
-                          </div>
-                          <div class="card-footer">
-                            <small class="text-muted">publicado el {{ listvideo. }}</small>
-                          </div>
-                        </div>
-                      </div>
-                        {% endfor %}
-                    </div>
-           
+                {# todos el  contenido #}               
+                    <ul class="list-group">
+                        {% if catalog_cate %}
+                            {% for k, v in catalog_cate.items %}
+                              <li class="list-group-item active" aria-current="true">{{ k }}</li>
+                              <li class="list-group-item">
+                                <div class="row row-cols-1 row-cols-md-4 row-cols-sm-1 rows-cols-lg-4 row-cols-xl-4 g-4" style="height:53vh; overflow-x:scroll;">
+                                  {% for listvideo in v %}
+                                  <div class="col">
+                                    <div class="card h-100">
+                                        <a href="{% url 'video:detallecatalog' url=listvideo.url pk=listvideo.id  %}">
+                                            <img
+                                            src="{% url 'video:view_img_catalog' listvideo.pk %}"
+                                            class="card-img-top"
+                                            alt="..."
+                                          />                              
+                                        </a>
+                                      <div class="card-body">
+                                        <h5 class="card-title">{{ listvideo.catalog_nombre }}</h5>
+                                      </div>
+                                      <div class="card-footer">
+                                        <small class="text-muted">publicado el {{ listvideo.fecha_publicacion }}</small>
+                                      </div>
+                                    </div>
+                                  </div>
+                                    {% endfor %}
+                                </div>
+                                {% include "media/paginator.html" %}                           
+                              </li>
+                            {% endfor %}
+                        {% endif %}
+                    </ul>
 
-                {% include "media/paginator.html" %}
+
             </div>
-        {% endif %}
+        
     {% endblock %}
 
     <!-- Footer -->
@@ -322,9 +334,11 @@
     type="text/javascript"
     src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/3.6.0/mdb.min.js"
     ></script>
+    <link href="https://vjs.zencdn.net/7.15.4/video-js.css" rel="stylesheet" />
 
     {% block scriptjs %}
-        
+    {% load static  %}
+    <script type="text/javascript" src="{% static 'js/control_base.js' %}"></script>
     {% endblock%}
 </body>
 </html>

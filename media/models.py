@@ -79,6 +79,7 @@ class TemporadaVideo(models.Model):
 
 
 class Videos(models.Model):
+    descripcion=models.CharField(max_length=50, help_text='Ingrese el nombre del video', null=True, blank=True)
     cap=models.CharField(help_text="Ingrese el numero de capitulo", max_length=50)
     idtemporada=models.ForeignKey(TemporadaVideo, on_delete=models.CASCADE, help_text='Ingrese la temporada del video', null=True)
     idcatalog=models.ForeignKey(CatalogoVideo ,help_text="Ingrese el catalogo al que pertenece el video", on_delete=models.CASCADE)

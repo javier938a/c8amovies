@@ -4,8 +4,9 @@ from django.views.generic import TemplateView
 from media.proces_usuario.crud_usuario import RegistrarUsuario
 from media.proces_usuario.crud_usuario import Login, Logout
 from media.proces_catalogo.crud_catalogo import DetalleCatalogo, ver_video, ver_image_video, ver_image_catalogo
+from media.proces_video.crud_video import VideoCap, ver_video_cap
 #obteniendo el modelo de catalogo
-from .models import CatalogoVideo
+from .models import CatalogoVideo, CategoriaCatalogo
 
 from django.http import Http404
 
@@ -32,12 +33,15 @@ class Principal(TemplateView):
 
     def get_context_data(self, **kwargs):
         context=super(Principal, self).get_context_data(**kwargs)
-        catalogos=CatalogoVideo.objects.all()
 
-        page=self.request.GET.get('page',1)
+        categorias=CategoriaCatalogo.objects.all()
 
-        datos=self.paginar_catalogos(catalogos, page)
-        context['paginator']=datos['paginator']
-        context['entity']=datos['cata']
+        catalogos_x_categorias={}
+        catalog=CatalogoVideo.objects.all()
+        for cate in categorias:
+            catalogos=CatalogoVideo.objects.filter(idcategoria__id=cate.pk)
+            catalogos_x_categorias[cate.categoria]=catalogos
+
+        context['catalog_cate']=catalogos_x_categorias
         
         return context

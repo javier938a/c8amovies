@@ -1,38 +1,21 @@
 {% extends "base.html" %}
 
-{% block titulo %}
-	<title>{{ detalleCatalogVideo.catalog_nombre }}</title>
-{% endblock titulo %}
-
 {% block contenido %}
 <div class="container-fluid">
-			{% if detalleCatalogVideo %}
+			{% if detalleVideo %}
 			<div class="card">
+				<center><h5 class="card-header">{{ detalleVideo.cap }}</h5></center>				
 				<center>
 					<video id="videoPlayer" controls style="width:100%; height:100%;" > 
-						<source src="{% url 'video:view_video' detalleCatalogVideo.pk %}" type="">
+						<source src="{% url 'video:view_cap' detalleVideo.pk %}" type="">
 							Tu navegador no soporta los videos HTML5
 					</video>					
 				</center>
-
-			  <div class="card-body">
-			    <h5 class="card-title">{{ detalleCatalogVideo.catalog_nombre }}</h5>
-			    <p class="card-text">
-			    	<h6 class="h6">Sipnosis</h6>
-			    	{{ detalleCatalogVideo.sipnosis }}
-			    </p>
-			  </div>
-			  <ul class="list-group list-group-flush">
-			    <li class="list-group-item"><span class="h6">Autor:</span> {{ detalleCatalogVideo.author }}</li>
-			    <li class="list-group-item"> <span class="h6">Categoria:</span> {{ detalleCatalogVideo.idcategoria }}</li>
-			    <li class="list-group-item"><span class="h6">Clasificacion:</span> {{ detalleCatalogVideo.idclasificacion }}</li>
-			  </ul>
-			   <div class="card-footer">
-            <small class="text-muted">publicado el {{ detalleCatalogVideo.fecha_publicacion }}</small>
-         </div>
+				<div class="card-body">
+					<h5 class="h5">{{ detalleVideo.descripcion }}</h5>
+				</div>
 			</div>
-		{% endif %}
-
+			{% endif %}
 		<!-- Pills navs -->
 		<ul class="nav nav-pills mb-3" id="ex1" role="tablist">
 			{% for k, v in temporadas.items %}
@@ -71,7 +54,7 @@
 		  {% else %}
 		  <div class="tab-pane fade" id="ex1-pills-{{ k }}" role="tabpanel" aria-labelledby="ex1-tab-{{ k }}">  
 		  {% endifequal %}
-		  	<div class="row row-cols-1 row-cols-md-1 row-cols-sm-1 row-cols-lg-5 row-cols-xl-5 g-4">
+		  	<div class="row row-cols-1 row-cols-md-5 g-4">
 			          	{% for video in v %}
 			    <div class="col">
 			        <div class="card">
@@ -94,8 +77,3 @@
 		</div>
 </div>
 {% endblock %}
-
-{% block scriptjs %}
-	{% load static %}
-	<script type="text/javascript" src="{% static 'js/funciones_detalle_catalogo.js' %}"></script>
-{% endblock scriptjs %}

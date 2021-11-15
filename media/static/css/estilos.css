@@ -1,0 +1,4 @@
+.scroll_categoria{
+	height: 50vh;
+	overflow-y: scroll !important;
+}
