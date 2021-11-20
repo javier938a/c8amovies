@@ -4,7 +4,7 @@ from django.urls import path, include
 from .views import Principal
 from .views import RegistrarUsuario, Login, Logout
 from .views import DetalleCatalogo, ver_video, ver_image_video, ver_image_catalogo
-from .views import VideoCap, ver_video_cap
+from .views import VideoCap, ver_video_cap, guardar_visualizaciones
 
 
 
@@ -19,5 +19,6 @@ urlpatterns=[
     path('ver-image-video/<int:pk>', ver_image_video, name='view_img_video'),
     path('ver-image-catalogo/<int:pk>', ver_image_catalogo, name='view_img_catalog'),
     path('capitulo/<int:pk>', VideoCap.as_view(), name='view_video_cap'),
-    path('ver-video-cap/<int:pk>', ver_video_cap, name='view_cap')
+    path('ver-video-cap/<int:pk>', ver_video_cap, name='view_cap'),
+    path('guardar_visualizaciones/', guardar_visualizaciones, name='save_video_view')
 ]

@@ -1,6 +1,7 @@
 from media.models import Videos
 from django.views.generic import DetailView
-
+from django.http import JsonResponse
+import json
 from media.models import Videos, TemporadaVideo, CatalogoVideo
 
 from django.shortcuts import redirect
@@ -35,6 +36,15 @@ def ver_video_cap(request, pk):
 	video_cap_select=Videos.objects.get(pk=pk)
 
 	return redirect(video_cap_select.video.url)
+
+
+def guardar_visualizaciones(request):
+
+	datos_video=json.loads(request.body)
+	idvideo=datos_video.get('id_video')
+	segundo_actual=datos_video.get('segundo_actual')
+
+	return JsonResponse(datos, safe=False)
 
 
 

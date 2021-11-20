@@ -12,6 +12,8 @@
 					</video>					
 				</center>
 				<div class="card-body">
+					<input type="hidden" name="pk_video" id="pk_video" value="{{ detalleVideo.pk }}"> 
+					<input type="hidden" name="url_view" id="url_view" value="{% url 'video:save_video_view' %}">
 					<h5 class="h5">{{ detalleVideo.descripcion }}</h5>
 				</div>
 			</div>
@@ -76,4 +78,9 @@
 			</div>
 		</div>
 </div>
+{% endblock %}
+
+{% block scriptjs %}
+	{% load static %}
+	<script type="text/javascript" src="{% static 'js/videos/operaciones_videos.js' %}"></script>
 {% endblock %}
